@@ -115,4 +115,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Achievements
 
 * Seems to be memory leak free according to valgrind and our limited testing.
-* keval.h and keval.c are 100% klausified.
+* keval.h and keval.c are 100% klausified™.
