@@ -47,6 +47,20 @@ kv_get_val_s(key_test);
 kv_get_val_i(0);
 ```
 
+### Retrieving keys
+
+You can get a key string by its index like this:
+
+```C
+char *key = kv_get_key(0);
+```
+
+You can also search for a key's index. Just pass the key.
+```C
+int index = kv_key_search(key_test);
+```
+
+
 ### Removing a key
 
 As easy as it gets!
