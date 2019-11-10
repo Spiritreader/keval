@@ -10,6 +10,10 @@ Clone project, copy keval.c and keval.c wherever you want.
 
 Any C compiler, run preferrably on Linux.
 
+## Important notes
+
+keval's indices are **unstable**! When removing a key from the data structure the last key in the array will be assigned in its place.
+
 ## Examples:
 
 ### Creating an instance and setting it as active
