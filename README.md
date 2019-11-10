@@ -96,7 +96,7 @@ data = kv_destroy(data);
 ```
 
 
-### For more documentation and return values please see the inline doc or `keval.h`**
+### For more documentation and return values please see the inline doc or `keval.h`
 
 ## Running the tests
 
