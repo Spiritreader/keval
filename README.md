@@ -112,6 +112,10 @@ Main.c provides a quick example and some tests on how to use the data structure.
 * **FunnyPocketBook** - *Testing* - [Profile](https://github.com/FunnyPocketBook)
 * **GordoGato81** - *Testing*
 
+## Support for people at my university
+
+You know where to find me.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
