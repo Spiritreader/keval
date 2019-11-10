@@ -42,9 +42,9 @@ It's as simple as adding them! Just call the retrieval function
 
 ```C
 //with the key string
-kv_get_val_s(key_test);
+char *result_s = kv_get_val_s(key_test);
 //with an index
-kv_get_val_i(0);
+char *result_i = kv_get_val_i(0);
 ```
 
 ### Retrieving keys
