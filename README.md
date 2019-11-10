@@ -15,9 +15,11 @@ Include my lib like this:
 include "keval.h"
 ```
 
-You will also need to add keval.c to the compile options of gcc/launch options/makefile, example:
+You will also need to add `keval.c` to the compile options of gcc/launch options/makefile, example:
 
-`gcc -g keval.c main.c -o main.out`
+```
+gcc -g keval.c main.c -o main.out
+```
 
 You can also use my makefile if you like :)
 
