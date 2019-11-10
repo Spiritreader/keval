@@ -10,6 +10,17 @@ Clone project, copy keval.c and keval.c wherever you want.
 
 Any C compiler, run preferrably on Linux.
 
+Include my lib like this:
+```C
+include "keval.h"
+```
+
+You will also need to add keval.c to the compile options of gcc/launch options/makefile, example:
+
+`gcc -g keval.c main.c -o main.out`
+
+You can also use my makefile if you like :)
+
 ## Important notes
 
 keval's indices are **unstable**! When removing a key from the data structure the last key in the array will be assigned in its place.
