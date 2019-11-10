@@ -21,7 +21,7 @@
                 "${file}",
                 "${fileDirname}/keval.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}.out"
             ],
             "options": {
                 "cwd": "/usr/bin"
