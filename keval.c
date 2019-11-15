@@ -277,3 +277,7 @@ int kv_print_pair(int index) {
     printf("%s\n", out);
     return FINE;
 }
+
+int kv_get_size() {
+    return data->size;
+}
