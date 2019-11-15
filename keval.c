@@ -128,10 +128,10 @@ char* kv_get_val_s(char* key) {
 
     int index = kv_key_search(key);
     if (index < 0) {
-        NULL;
+        return NULL;
     }
 
-    return 0;
+    return kv_get_val_i(index);
 }
 
 char* kv_get_val_i(int key_index) {
