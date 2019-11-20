@@ -120,7 +120,7 @@ int kv_key_search(char *key);
  * Retrieves the total amount of keys present in the data structure
  * @returns an integer containing the amount of keys in the struct
  **/
-int kv_get_size();
+int kv_get_size(void);
 
 
 #endif // KEVAL_H_INCLUDED

@@ -278,6 +278,6 @@ int kv_print_pair(int index) {
     return FINE;
 }
 
-int kv_get_size() {
+int kv_get_size(void) {
     return data->size;
 }
