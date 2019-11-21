@@ -279,5 +279,6 @@ int kv_print_pair(int index) {
 }
 
 int kv_get_size(void) {
-    return data->size;
+    int index = data->size;
+    return index;
 }
