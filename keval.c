@@ -28,10 +28,12 @@ int resize_struct_arrays(int amount) {
 
     if (extended_keys == NULL && extended_values != NULL) {
         free(extended_values);
+        return ALLOC_ERR;
     }
 
     if (extended_values == NULL && extended_keys != NULL) {
         free(extended_keys);
+        return ALLOC_ERR;
     }
 
     if (extended_keys == NULL || extended_values == NULL) {
