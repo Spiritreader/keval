@@ -5,6 +5,9 @@
 
 int resize_struct_arrays(int amount, struct kv_data* data) {
     int new_size = data->size + amount;
+    if (data == NULL) {
+        return NO_INIT;
+    }
 
     if (new_size < 0) {
         return OUT_OF_BOUNDS_ERR;
@@ -54,6 +57,9 @@ int resize_struct_arrays(int amount, struct kv_data* data) {
 int kv_key_search(char* key, struct kv_data* data) {
     int index = NOT_FOUND;
     int found = 0;
+    if (data == NULL) {
+        return NO_INIT;
+    }
     if (key == NULL) {
         return index;
     }
@@ -138,6 +144,9 @@ char* kv_get_val_i(int key_index, struct kv_data* data) {
 
 int kv_add_key(char* key, struct kv_data* data) {
     long unsigned int len = strlen(key);
+    if (data == NULL) {
+        return NO_INIT;
+    }
     if (len <= 0) {
         return ALLOC_ERR;
     }
@@ -151,7 +160,7 @@ int kv_add_key(char* key, struct kv_data* data) {
 
     int res = resize_struct_arrays(1, data);
 
-    if (res == OUT_OF_BOUNDS_ERR || res == ALLOC_ERR ) {
+    if (res == OUT_OF_BOUNDS_ERR || res == ALLOC_ERR || res == NO_INIT) {
         return res;
     }
 
@@ -230,7 +239,7 @@ int kv_remove_key_i(int index, struct kv_data* data) {
     //resize array to one smaller
     res = resize_struct_arrays(-1, data);
 
-    if (res == ALLOC_ERR || res == OUT_OF_BOUNDS_ERR) {
+    if (res == ALLOC_ERR || res == OUT_OF_BOUNDS_ERR || res == NO_INIT) {
         return res;
     }
 
