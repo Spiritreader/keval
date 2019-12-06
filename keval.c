@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include "keval.h"
 
-int init = 0;
-struct kv_data *data;
-
-int resize_struct_arrays(int amount) {
+int resize_struct_arrays(int amount, struct kv_data* data) {
     int new_size = data->size + amount;
 
     if (new_size < 0) {
@@ -54,7 +51,7 @@ int resize_struct_arrays(int amount) {
     return new_size;
 }
 
-int kv_key_search(char* key) {
+int kv_key_search(char* key, struct kv_data* data) {
     int index = NOT_FOUND;
     int found = 0;
     if (key == NULL) {
@@ -83,15 +80,6 @@ struct kv_data* kv_spawn() {
     return tmp;
 }
 
-int kv_set_instance(struct kv_data* instance) {
-    if (instance == NULL) {
-        return NO_INIT;
-    }
-    data = instance;
-    return FINE;
-}
-
-
 struct kv_data* kv_destroy(struct kv_data *instance) {
     if (instance == NULL) {
         return NULL;
@@ -111,7 +99,7 @@ struct kv_data* kv_destroy(struct kv_data *instance) {
     return NULL;
 }
 
-char* kv_get_key(int index) {
+char* kv_get_key(int index, struct kv_data* data) {
     if (data == NULL) {
         return NULL;
     }
@@ -123,20 +111,20 @@ char* kv_get_key(int index) {
     return data->keys[index];
 }
 
-char* kv_get_val_s(char* key) {
+char* kv_get_val_s(char* key, struct kv_data* data) {
     if (data == NULL) {
         return NULL;
     }
 
-    int index = kv_key_search(key);
+    int index = kv_key_search(key, data);
     if (index < 0) {
         return NULL;
     }
 
-    return kv_get_val_i(index);
+    return kv_get_val_i(index, data);
 }
 
-char* kv_get_val_i(int key_index) {
+char* kv_get_val_i(int key_index, struct kv_data* data) {
     if (data == NULL) {
         return NULL;
     }
@@ -148,20 +136,20 @@ char* kv_get_val_i(int key_index) {
     return data->values[key_index];
 }
 
-int kv_add_key(char* key) {
+int kv_add_key(char* key, struct kv_data* data) {
     long unsigned int len = strlen(key);
     if (len <= 0) {
         return ALLOC_ERR;
     }
 
-    if (kv_key_search(key) != NOT_FOUND) {
+    if (kv_key_search(key, data) != NOT_FOUND) {
         return DUPLICATE_DETECTED;
     }
 
     char* tmp = malloc((len + 1)*sizeof(char));
     strcpy(tmp, key);
 
-    int res = resize_struct_arrays(1);
+    int res = resize_struct_arrays(1, data);
 
     if (res == OUT_OF_BOUNDS_ERR || res == ALLOC_ERR ) {
         return res;
@@ -171,7 +159,7 @@ int kv_add_key(char* key) {
     return FINE;
 }
 
-int kv_set_val_i(int key_index, char* in) {
+int kv_set_val_i(int key_index, char* in, struct kv_data* data) {
     if (data == NULL) {
         return NO_INIT;
     }
@@ -196,25 +184,25 @@ int kv_set_val_i(int key_index, char* in) {
     return FINE;
 }
 
-int kv_set_val_s(char* key, char* val) {
-    int index = kv_key_search(key);
+int kv_set_val_s(char* key, char* val, struct kv_data* data) {
+    int index = kv_key_search(key, data);
     if (index < 0) {
         return index;
     }
 
-    return kv_set_val_i(index, val);
+    return kv_set_val_i(index, val, data);
 }
 
-int kv_remove_key_s(char* key) {
-    int index = kv_key_search(key);
+int kv_remove_key_s(char* key, struct kv_data* data) {
+    int index = kv_key_search(key, data);
     if (index < 0) {
         return index;
     }
     
-    return kv_remove_key_i(index);
+    return kv_remove_key_i(index, data);
 }
 
-int kv_remove_key_i(int index) {
+int kv_remove_key_i(int index, struct kv_data* data) {
     int res;
 
     if (data == NULL) {
@@ -240,7 +228,7 @@ int kv_remove_key_i(int index) {
     }
     
     //resize array to one smaller
-    res = resize_struct_arrays(-1);
+    res = resize_struct_arrays(-1, data);
 
     if (res == ALLOC_ERR || res == OUT_OF_BOUNDS_ERR) {
         return res;
@@ -249,7 +237,7 @@ int kv_remove_key_i(int index) {
     return FINE;
 }
 
-int kv_print_pair(int index) {
+int kv_print_pair(int index, struct kv_data* data) {
     if (data == NULL) {
         return NO_INIT;
     }
@@ -258,8 +246,8 @@ int kv_print_pair(int index) {
         return OUT_OF_BOUNDS_ERR;
     }
     
-    char* key = kv_get_key(index);
-    char* value = kv_get_val_i(index);
+    char* key = kv_get_key(index, data);
+    char* value = kv_get_val_i(index, data);
 
 	long unsigned int strlen_key = strlen(key);
 	long unsigned int strlen_val;
@@ -280,7 +268,7 @@ int kv_print_pair(int index) {
     return FINE;
 }
 
-int kv_get_size(void) {
+int kv_get_size(struct kv_data* data) {
     int index = data->size;
     return index;
 }

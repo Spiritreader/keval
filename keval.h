@@ -24,14 +24,6 @@ struct kv_data {
 **/
 struct kv_data* kv_spawn(void);
 
-/**
- * Changes the currently active keval instance
- * Pass a kv_data struct pointer to it, after that
- * it will be set as available for manipulation
- * @returns: FINE if it worked, NO_INIT if an invalid strudt has been passed
-**/
-int kv_set_instance(struct kv_data* instance);
-
 
 /**
  * Returns a value for a key given as string
@@ -39,7 +31,7 @@ int kv_set_instance(struct kv_data* instance);
  *          NULL if the key wasn't found in the structure
  * @error NULL if keval wasn't intialized
 **/
-char* kv_get_val_s(char* key);
+char* kv_get_val_s(char* key, struct kv_data* data);
 
 /**
  * Returns a value for a key given as integer
@@ -47,7 +39,7 @@ char* kv_get_val_s(char* key);
  *          NULL if a wrong index was entered
  * @error NULL if keval wasn't initialized
 **/
-char* kv_get_val_i(int val_index);
+char* kv_get_val_i(int val_index, struct kv_data* data);
 
 
 /**
@@ -56,7 +48,7 @@ char* kv_get_val_i(int val_index);
  *          NULL if a wrong index was entered
  * @error NULL if keval wasn't initialized
 **/
-char* kv_get_key(int index);
+char* kv_get_key(int index, struct kv_data* data);
 
 /**
  * Prints a key value pair string and writes it to out.
@@ -64,21 +56,21 @@ char* kv_get_key(int index);
  * @error NULL if keval wasn't initialized, OUT_OF_BOUNDS_ERR if index is out of range
  *
 **/
-int kv_print_pair(int index);
+int kv_print_pair(int index, struct kv_data* data);
 
 /**
  * Adds a key to the array
  * @returns FINE if successful
  * @error ALLOC_ERR or OUT_OF_BOUNDS_ERR
 **/
-int kv_add_key(char* key);
+int kv_add_key(char* key, struct kv_data* data);
 
 /**
  * Sets the value of a key to a char
  * @returns FINE if successful
  * @error NO_INIT if keval wasn't initialized, OUT_OF_BOUNDS and NULL_ERR if val is NULL
 **/
-int kv_set_val_i(int key_index, char* val);
+int kv_set_val_i(int key_index, char* val, struct kv_data* data);
 
 /**
  * Sets the value of a key to a char
@@ -87,14 +79,14 @@ int kv_set_val_i(int key_index, char* val);
             NOT_FOUND if key is not in struct
             and NULL_ERR if val is NULL
 **/
-int kv_set_val_s(char* key, char* val);
+int kv_set_val_s(char* key, char* val, struct kv_data* data);
 
 /**
  * Removes a key from the struct given its key string
  * @returns FINE if successful
  * @error NOT_FOUND if key string isn't present
 **/
-int kv_remove_key_s(char* key);
+int kv_remove_key_s(char* key, struct kv_data* data);
 
 /**
  * Removes a key from the struct given its index
@@ -102,7 +94,7 @@ int kv_remove_key_s(char* key);
  * @error NO_INIT if keval wasn't initialized,
             NOT_FOUND if key is not in struct
 **/
-int kv_remove_key_i(int index);
+int kv_remove_key_i(int index, struct kv_data* data);
 
 /**
  * Destroys the keval instance and frees all memory
@@ -114,13 +106,13 @@ struct kv_data* kv_destroy(struct kv_data* instance);
  * Gets an index value for a key string
  * @returns the index of the key string, DUPLICATE_DETECTED if duplicate
 **/
-int kv_key_search(char *key);
+int kv_key_search(char *key, struct kv_data* data);
 
 /**
  * Retrieves the total amount of keys present in the data structure
  * @returns an integer containing the amount of keys in the struct
  **/
-int kv_get_size(void);
+int kv_get_size(struct kv_data* data);
 
 
 #endif // KEVAL_H_INCLUDED

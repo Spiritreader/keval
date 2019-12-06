@@ -24,7 +24,6 @@ int main()
     if (data == NULL) {
         return -1;
     }
-    kv_set_instance(data);
     char joh[] = "Johannes";
     char lennard[] = "Lennard";
     char* test = malloc(5*sizeof(char));
@@ -33,39 +32,36 @@ int main()
     test[2] = '1';
     test[3] = '1';
     test[4] = '\0';
-    kv_add_key(joh);
-    kv_add_key(joh);
-    kv_add_key(lennard);
-    kv_set_val_s("Johannes", test);
+    kv_add_key(joh, data);
+    kv_add_key(joh, data);
+    kv_add_key(lennard, data);
+    kv_set_val_s("Johannes", test, data);
     free(test);
-    kv_set_val_s("Lennard", "short");
-    kv_set_val_s("Lennard", "is configuring launch.json");
-    kv_set_val_s("Johannes", "Peter");
-    kv_print_pair(0);
-    kv_remove_key_i(0);
-    kv_remove_key_i(0);
-    kv_remove_key_i(0);
-    kv_print_pair(0);
-    kv_add_key(joh);
-    kv_set_val_s(joh, "Hi");
+    kv_set_val_s("Lennard", "short", data);
+    kv_set_val_s("Lennard", "is configuring launch.json", data);
+    kv_set_val_s("Johannes", "Peter", data);
+    kv_print_pair(0, data);
+    kv_remove_key_i(0, data);
+    kv_remove_key_i(0, data);
+    kv_remove_key_i(0, data);
+    kv_print_pair(0, data);
+    kv_add_key(joh, data);
+    kv_set_val_s(joh, "Hi", data);
     data = kv_destroy(data);
 
     //new test
     struct kv_data *ary1 = kv_spawn();
     struct kv_data *ary2 = kv_spawn();
-    kv_set_instance(ary1);
-    kv_add_key(lennard);
-    kv_add_key(joh);
-    kv_set_val_s("Lennard", "short");
-    kv_set_val_i(1, "Peter");
-    kv_set_instance(ary2);
-    kv_add_key(joh);
-    kv_set_val_i(0, "Hans");
-    kv_print_pair(1);
-    kv_set_instance(ary1);
-    kv_print_pair(0);
+    kv_add_key(lennard, ary1);
+    kv_add_key(joh, ary1);
+    kv_set_val_s("Lennard", "short", ary1);
+    kv_set_val_i(1, "Peter", ary1);
+    kv_add_key(joh, ary2);
+    kv_set_val_i(0, "Hans", ary2);
+    kv_print_pair(1, ary2);
+    kv_print_pair(0, ary1);
     ary2 = kv_destroy(ary2);
-    kv_print_pair(0);
+    kv_print_pair(0, ary2);
     ary1 = kv_destroy(ary1);
     return 0;
 }
